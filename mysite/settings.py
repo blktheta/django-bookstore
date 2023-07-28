@@ -16,7 +16,7 @@ from environs import Env
 
 # Import environment variables
 env = Env()
-env.read_nev()
+env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,5 +136,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Use CustomUser model instead of default User model.
-
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+# Overwrite default Log in/out redirection from to /pages:home/
+LOGIN_REDIRECT_URL = "pages:home"
+LOGOUT_REDIRECT_URL = "pages:home"
